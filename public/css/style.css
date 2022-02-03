@@ -1,0 +1,36 @@
+/*@font-face {*/
+/*    font-family: "BYekan";*/
+/*    src: url("../fonts/BYekan-webfont.eot") format("eot"),*/
+/*        url("../fonts/BYekan-webfont.woff") format("woff"),*/
+/*        url("../fonts/BYekan-webfont.ttf") format("truetype");*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+/*}*/
+body{
+    background-color:black !important;
+}
+
+.input-border{
+    border: none;
+    border-bottom:1px solid white !important;
+    border-radius: 5px;
+    background-color:black;
+    color:white !important;
+}
+.input-border::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 0.75; /* Firefox */
+}
+.no-border{
+    border: none !important;
+}
+textarea:focus,input:focus {
+    border: 1px solid #b0b00b !important;
+    box-shadow: 0px 0px 10px 2px #b0b00b;
+    background: rgb(255, 0, 0);
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.5) 0%, rgba(255, 166, 0, 0.46852244315695024) 50%, rgba(255, 247, 0, 0.49933476808692223) 100%);
+}
+.form-border{
+    /*border: 1px solid white !important;*/
+    /*box-shadow:0px 0px 10px 2px  #b0b00b;*/
+}
