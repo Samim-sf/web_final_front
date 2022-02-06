@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {Form} from 'react-bootstrap'
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {addMovie} from "../../services/movieService";
 import axios from "axios";
 
-const AddMovieInfo = () => {
+const AddNewMovie = () => {
     const [getMovieName, setMovieName] = useState("");
     const [getReleaseYear, setReleaseYear] = useState();
     const [getdesc, setdesc] = useState("");
@@ -75,18 +77,20 @@ const AddMovieInfo = () => {
                     }
                 }
             )
-            .then(({ data, status }) => {
-                if (status === 201) {
-                    toast.success("کاربر با موفقیت ساخته شد.", {
-                        position: "top-right",
-                        closeOnClick: true
-                    });
-                    console.log(data);
-                    reset();
-                }
+            .then(({data, status}) => {
+                // console.log(status)
+                // if (status === 201) {
+                toast.success("Movie created successfully", {
+                    position: "bottom-right",
+                    closeOnClick: true
+                });
+                toast.configure();
+                // console.log(data);
+                reset();
+                // }
             })
             .catch(ex => {
-                toast.error("مشکلی پیش آمده.", {
+                toast.error("Try again", {
                     position: "top-right",
                     closeOnClick: true
                 });
@@ -113,7 +117,8 @@ const AddMovieInfo = () => {
                 {/*Description*/}
                 <label htmlFor="movie-summary" className="text-white m-2 mb-0 mt-4 p-1 pt-0">Film synopsis:</label>
                 <textarea name="description" id="movie-summary" cols="30" rows="10" placeholder="Summary of the movie"
-                          required className="m-2 p-2 input-border gradient-background" onChange={onChangeDesc} value={getdesc}/>
+                          required className="m-2 p-2 input-border gradient-background" onChange={onChangeDesc}
+                          value={getdesc}/>
 
                 {/*/!*Poster*!/*/}
                 {/*<Form.Group controlId="formFile" className="mb-3 input-border border-none  mt-3 mb-2 no-border ">*/}
@@ -135,4 +140,4 @@ const AddMovieInfo = () => {
     );
 }
 
-export default AddMovieInfo;
+export default AddNewMovie;

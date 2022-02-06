@@ -5,8 +5,6 @@ import React, {useState} from "react";
 
 function AlertModal({title, desc, isShow, isShown}) {
     const [getShow, setGetShow] = useState(isShow);
-    console.log(getShow);
-    console.log(isShow);
     const handleClose = () => {
         setGetShow(false)
         isShown();
