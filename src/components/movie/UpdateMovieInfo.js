@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Form} from 'react-bootstrap'
 import axios from "axios";
 import {toast} from "react-toastify";
-import MovieCardAsGrid from "./MovieCardAsGrid";
 import {useHistory} from "react-router-dom";
 
-const UpdateMovieInfo = (props,{id,movieName,releaseYear,description,posterPath}) => {
-    console.log("getMovieName  "+ props.id);
+const UpdateMovieInfo = (props) => {
+    console.log("getMovieName  " + props.id);
     const [getMovieName, setMovieName] = useState(props.movieName);
     const [getReleaseYear, setReleaseYear] = useState(props.releaseYear);
     const [getdesc, setdesc] = useState(props.description);
@@ -42,7 +40,7 @@ const UpdateMovieInfo = (props,{id,movieName,releaseYear,description,posterPath}
         };
         axios
             .post(
-                "http://localhost:8000/index.php/update/?id="+ props.id,
+                "http://localhost:8000/index.php/update/?id=" + props.id,
                 JSON.stringify(movie),
                 {
                     headers: {
@@ -51,17 +49,15 @@ const UpdateMovieInfo = (props,{id,movieName,releaseYear,description,posterPath}
                 }
             )
             .then(({data, status}) => {
-                // console.log(status)
-                // if (status === 201) {
-                toast.success("Movie updated successfully", {
-                    position: "bottom-right",
-                    closeOnClick: true
-                });
-                toast.configure();
-                // console.log(data);
-                reset();
-                // window.location = "localhost:3000";
-                // }
+                console.log(status)
+                if (status === 201) {
+                    toast.success("Movie updated successfully", {
+                        position: "bottom-right",
+                        closeOnClick: true
+                    });
+                    toast.configure();
+                    reset();
+                }
             })
             .catch(ex => {
                 toast.error("Try again", {
@@ -92,13 +88,7 @@ const UpdateMovieInfo = (props,{id,movieName,releaseYear,description,posterPath}
                 <label htmlFor="movie-summary" className="text-white m-2 mb-0 mt-4 p-1 pt-0">Film synopsis:</label>
                 <textarea name="description" id="movie-summary" cols="30" rows="10" placeholder="Summary of the movie"
                           required className="m-2 p-2 input-border gradient-background"
-                          onChange={onChangeDesc} >{getdesc}</textarea>
-
-                {/*/!*Poster*!/*/}
-                {/*<Form.Group controlId="formFile" className="mb-3 input-border border-none  mt-3 mb-2 no-border ">*/}
-                {/*    <Form.Label>Choose movie poster</Form.Label>*/}
-                {/*    <Form.Control type="file" accept="image/*" className="input-border btn-danger no-border" onChange={onChangePoster} required/>*/}
-                {/*</Form.Group>*/}
+                          onChange={onChangeDesc}>{getdesc}</textarea>
 
                 {/*Url text*/}
                 <label htmlFor="movie-name" className="text-white m-2 mb-0 mt-2 p-1 pt-0">Movie url:</label>

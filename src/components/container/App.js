@@ -1,14 +1,9 @@
 import React, {Fragment, useState} from "react";
 import Header from "../common/Header";
-import MovieCardAsGrid from "../movie/MovieCardAsGrid";
 import AddNewMovie from "../movie/AddNewMovie";
 import {Route, Switch} from 'react-router-dom';
-import UpdateMovieInfo from "../movie/UpdateMovieInfo";
-import MovieCardsGrid from "../movie/MovieCardsGrid";
-import MovieCardAsList from "../movie/MovieCardAsList";
 import UpdateMovieInfoHandle from "../movie/UpdateMovieInfoHandle";
 import SearchMovieCardsGrid from "../movie/SearchMovieCardGrid";
-import MovieCardsList from "../movie/MovieCardsList";
 import MovieCards from "../movie/MovieCards";
 
 function App() {

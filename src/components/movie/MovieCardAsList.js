@@ -2,14 +2,11 @@ import React, {useState, Fragment} from "react";
 import AlertDeleteModal from "../common/AlertDeleteModal";
 import MovieInformation from "./MovieInformation";
 import {useHistory} from "react-router-dom";
-import {Card} from "react-bootstrap";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import {CardActions} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -29,7 +26,6 @@ const MovieCardAsList = ({id, movieName, releaseYear, desc, posterUrl, isDeleted
     }
     const editHandle = () => {
         history.push("/edit-movie/" + id);
-        // editPage = <UpdateMovieInfo id={id}/>
     }
     const infoHandle = () => {
         setIsShownInfoModal(true);

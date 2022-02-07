@@ -1,6 +1,4 @@
 import React, {useState, Fragment, useEffect} from "react";
-import MovieCardAsGrid from "./MovieCardAsGrid";
-import {findRenderedComponentWithType} from "react-dom/test-utils";
 import MovieCardAsList from "./MovieCardAsList";
 
 
@@ -44,14 +42,6 @@ const MovieCardsList = () => {
                     posterUrl={movie.posterPath}
                     isDeleted = {deleteHandle}
                 />
-                // <MovieCardAsGrid
-                // key={i}
-                // id={movie.id}
-                // movieName={movie.movie_name}
-                // releaseYear={movie.release_year}
-                // desc={movie.description}
-                // posterUrl={movie.poster_fileName}
-                // />
             ))}
         </Fragment>
     );

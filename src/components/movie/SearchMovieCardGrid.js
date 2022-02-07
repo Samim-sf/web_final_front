@@ -1,12 +1,9 @@
 import React, {useState, Fragment, useEffect} from "react";
 import MovieCardAsGrid from "./MovieCardAsGrid";
-import {findRenderedComponentWithType} from "react-dom/test-utils";
 import axios from "axios";
 
 
 const SearchMovieCardsGrid = (props) => {
-    const [searchText,setSearchText]=useState(props.match.params.text);
-    const [fetchALl, setFetchAll] = useState([]);
     const [isDeleted,setIsDeleted] = useState(false);
     const [getData, setData] = useState([]);
     const [searched, setSearched] = useState(true);
@@ -29,7 +26,6 @@ const SearchMovieCardsGrid = (props) => {
     if (searched) return (" loading");
     return (
         <Fragment>
-            {/*{console.log(Object.keys(getData))}*/}
             {getData.map((movie, i) => (
                 <MovieCardAsGrid
                     key={i}

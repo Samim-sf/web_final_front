@@ -2,15 +2,12 @@ import React, {useRef, useState} from 'react';
 import {Nav, Navbar, Container} from 'react-bootstrap';
 import {NavLink, useHistory} from "react-router-dom";
 import {ButtonGroup, ToggleButton} from "@mui/material";
-import axios from "axios";
-import {toast} from "react-toastify";
 
 const Header = ({changeModel}) => {
     const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
     const searchValue = useRef(null);
     const history = useHistory();
-    let searchComp = null;
     const radios = [
         {name: 'Grid', value: '1'},
         {name: 'List', value: '2'},
@@ -21,12 +18,6 @@ const Header = ({changeModel}) => {
             history.push("/search-movie/" + searchValue.current.value);
         }
     }
-    const handleGridOrList = (e) => {
-        console.log(e);
-        setRadioValue(e.currentTarget.value);
-        changeModel();
-    }
-
 
     return (
         <div>

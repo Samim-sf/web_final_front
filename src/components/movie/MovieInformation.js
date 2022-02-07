@@ -2,7 +2,6 @@ import Modal from "react-bootstrap/Modal";
 import React, {useState} from "react";
 import {Button} from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CardMedia from "@mui/material/CardMedia";
 
 const MovieInformation = ({movieName, releaseYear, description, imageUrl, onHide, isShown}) => {
     return (

@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
-import {Form} from 'react-bootstrap'
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import {addMovie} from "../../services/movieService";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 
@@ -11,7 +8,6 @@ const AddNewMovie = () => {
     const [getMovieName, setMovieName] = useState("");
     const [getReleaseYear, setReleaseYear] = useState();
     const [getdesc, setdesc] = useState("");
-    // const [getPoster, setPoster] = useState();
     const [getUrl, setUrl] = useState();
     const history = useHistory();
     const onChangeMovieName = (e) => {
@@ -26,21 +22,12 @@ const AddNewMovie = () => {
     const onChangeUrl = (e) => {
         setUrl(e.target.value);
     }
-    // const onChangePoster = (e) => {
-    //     setPoster(e.target.files);
-    //     let fileReader = new FileReader();
-    //     fileReader.readAsDataURL(e.target.files[0]);
-    //     fileReader.onload = (event) => {
-    //         setPoster(event.target.result);
-    //     }
-    // }
     const reset = () => {
         setMovieName("");
         setReleaseYear("");
         setdesc("");
-        // setPoster(null);
         setUrl("");
-       history.goBack();
+        history.goBack();
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,26 +37,6 @@ const AddNewMovie = () => {
             desc: getdesc,
             poster: getUrl
         };
-        // try {
-        //     // const {status} = await addMovie(movie);
-        //     console.log(JSON.stringify(movie));
-        //     const {status}= await axios.post(`http://localhost:8000/index.php`,(movie))
-        //     console.log(status);
-        //     if (status === 200) {
-        //         toast.success("کاربر با موفقیت ساخته شد.", {
-        //             position: "top-right",
-        //             closeOnClick: true
-        //         });
-        //         // reset();
-        //     }
-        // } catch (ex) {
-        //     toast.error("مشکلی پیش آمده.", {
-        //         position: "top-right",
-        //         closeOnClick: true
-        //     });
-        //     console.log(ex);
-        // }
-
         axios
             .post(
                 "http://localhost:8000/index.php/create",
@@ -80,17 +47,16 @@ const AddNewMovie = () => {
                     }
                 }
             )
-            .then(({data, status}) => {
-                // console.log(status)
-                // if (status === 201) {
-                toast.success("Movie created successfully", {
-                    position: "bottom-right",
-                    closeOnClick: true
-                });
-                toast.configure();
-                // console.log(data);
-                reset();
-                // }
+            .then(({status}) => {
+                console.log(status)
+                if (status === 201) {
+                    toast.success("Movie created successfully", {
+                        position: "bottom-right",
+                        closeOnClick: true
+                    });
+                    toast.configure();
+                    reset();
+                }
             })
             .catch(ex => {
                 toast.error("Try again", {
@@ -122,12 +88,6 @@ const AddNewMovie = () => {
                 <textarea name="description" id="movie-summary" cols="30" rows="10" placeholder="Summary of the movie"
                           required className="m-2 p-2 input-border gradient-background" onChange={onChangeDesc}
                 >{getdesc}</textarea>
-
-                {/*/!*Poster*!/*/}
-                {/*<Form.Group controlId="formFile" className="mb-3 input-border border-none  mt-3 mb-2 no-border ">*/}
-                {/*    <Form.Label>Choose movie poster</Form.Label>*/}
-                {/*    <Form.Control type="file" accept="image/*" className="input-border btn-danger no-border" onChange={onChangePoster} required/>*/}
-                {/*</Form.Group>*/}
 
                 {/*Url text*/}
                 <label htmlFor="movie-name" className="text-white m-2 mb-0 mt-2 p-1 pt-0">Movie url:</label>
