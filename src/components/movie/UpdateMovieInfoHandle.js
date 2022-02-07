@@ -1,48 +1,28 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import UpdateMovieInfo from "./UpdateMovieInfo";
+import axios from "axios";
 
 const UpdateMovieInfoHandle = (props) => {
-    const [getId, setId] = useState(props.match.params.id);
-    const [getMovieName, setMovieName] = useState();
-    const [getReleaseYear, setReleaseYear] = useState();
-    const [getdesc, setdesc] = useState();
-    const [getPoster, setPoster] = useState();
     const [getData, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        console.log("hello")
-        getSingleData()
+        getSingleData();
     }, []);
-
     const getSingleData = async () => {
-        await fetch('http://localhost:8000/index.php/read/?id=' + props.match.params.id
-            , {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
+        await axios.get(
+            'http://localhost:8000/index.php/read/?id=' + props.match.params.id
         )
-            .then(function (response) {
-                console.log(response)
-                return response.json();
-            })
-            .then(function (myJson) {
-                console.log(myJson);
-                setData(myJson);
+            .then(response => {
+                setData(response.data);
+                setLoading(false);
             });
-        console.log("get data : ");
-        console.log(getData);
-        {
-            getData.map(async (movie) => {
-                await setMovieName(movie.movie_name);
-                await setReleaseYear(movie.release_year);
-                await setdesc(movie.description);
-                await setPoster(movie.poster_fileName);
-            })
-        }
+
     }
+    if (loading) return (" loading...");
     return (
-        <UpdateMovieInfo id={getId} movieName={getMovieName} description={getdesc} posterPath={getPoster}/>
+        <UpdateMovieInfo id={getData[0].id} movieName={getData[0].movie_name} releaseYear={getData[0].release_year}
+                         description={getData[0].description} posterPath={getData[0].poster_fileName}/>
+
     );
 }
 export default UpdateMovieInfoHandle;
