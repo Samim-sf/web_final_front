@@ -37,3 +37,8 @@ textarea:focus,.gradient-background:focus {
 .border-radius{
     border-radius: 5px;
 }
+
+.card-background-color{
+    background: rgb(255,0,0);
+    background: linear-gradient(180deg, rgba(255,0,0,0.36207986612613796) 0%, rgba(255,159,0,0.33967090254070376) 35%, rgba(255,254,0,0.3536765047816002) 100%);
+}

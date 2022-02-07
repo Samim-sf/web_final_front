@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import {addMovie} from "../../services/movieService";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 const AddNewMovie = () => {
     const [getMovieName, setMovieName] = useState("");
@@ -12,6 +13,7 @@ const AddNewMovie = () => {
     const [getdesc, setdesc] = useState("");
     // const [getPoster, setPoster] = useState();
     const [getUrl, setUrl] = useState();
+    const history = useHistory();
     const onChangeMovieName = (e) => {
         setMovieName(e.target.value);
     }
@@ -38,6 +40,7 @@ const AddNewMovie = () => {
         setdesc("");
         // setPoster(null);
         setUrl("");
+       history.goBack();
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -118,7 +121,7 @@ const AddNewMovie = () => {
                 <label htmlFor="movie-summary" className="text-white m-2 mb-0 mt-4 p-1 pt-0">Film synopsis:</label>
                 <textarea name="description" id="movie-summary" cols="30" rows="10" placeholder="Summary of the movie"
                           required className="m-2 p-2 input-border gradient-background" onChange={onChangeDesc}
-                          value={getdesc}/>
+                >{getdesc}</textarea>
 
                 {/*/!*Poster*!/*/}
                 {/*<Form.Group controlId="formFile" className="mb-3 input-border border-none  mt-3 mb-2 no-border ">*/}

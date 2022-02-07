@@ -1,15 +1,33 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Nav, Navbar, Container} from 'react-bootstrap';
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import {ButtonGroup, ToggleButton} from "@mui/material";
+import axios from "axios";
+import {toast} from "react-toastify";
 
-const Header = () => {
+const Header = ({changeModel}) => {
     const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
+    const searchValue = useRef(null);
+    const history = useHistory();
+    let searchComp = null;
     const radios = [
         {name: 'Grid', value: '1'},
         {name: 'List', value: '2'},
     ];
+    const handleSearch = (event) => {
+        event.preventDefault();
+        if (searchValue.current.value !== "" && searchValue.current.value !== " ") {
+            history.push("/search-movie/" + searchValue.current.value);
+        }
+    }
+    const handleGridOrList = (e) => {
+        console.log(e);
+        setRadioValue(e.currentTarget.value);
+        changeModel();
+    }
+
+
     return (
         <div>
             <Navbar bg="dark" variant="dark">
@@ -25,15 +43,21 @@ const Header = () => {
                         <NavLink className="m-2  nav-link" to="/edit-movie" onClick={e => e.preventDefault()}
                                  activeClassName="active" activeStyle={{color: "black", background: "white"}}>Edit movie
                             info</NavLink>
+                        <NavLink className="m-2  nav-link" to="/search-movie" onClick={e => e.preventDefault()}
+                                 activeClassName="active" activeStyle={{color: "black", background: "white"}}>Search
+                            result
+                        </NavLink>
                     </Nav>
 
+                    {/*Search box*/}
                     <form
                         className="form-inline justify-content-center"
-                        onSubmit={event => event.preventDefault()}
+                        onSubmit={handleSearch}
 
                     >
                         <div className="input-group w-100">
-                            <input type="text" className="w-50 p-2  form-control" placeholder="Search"/>
+                            <input type="text" className="w-50 p-2  form-control" placeholder="Search"
+                                   ref={searchValue}/>
                             <button type="submit" className="fa fa-search btn btn-primary"/>
                         </div>
                     </form>
@@ -52,16 +76,16 @@ const Header = () => {
                             name="radio"
                             value={radio.value}
                             checked={radioValue === radio.value}
-                            onChange={(e) => setRadioValue(e.currentTarget.value)}
+                            onChange={() => {
+                                changeModel(idx % 2 === 0)
+                            }}
                         >
                             {radio.name}
                         </ToggleButton>
                     ))}
                 </ButtonGroup>
-                );
             </div>
         </div>
-
     );
 }
 

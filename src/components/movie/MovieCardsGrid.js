@@ -5,9 +5,13 @@ import {findRenderedComponentWithType} from "react-dom/test-utils";
 
 const MovieCardsGrid = () => {
     const [fetchALl, setFetchAll] = useState([]);
+    const [isDeleted,setIsDeleted] = useState(false);
+    const deleteHandle=()=>{
+        setIsDeleted(!isDeleted);
+    }
     useEffect(() => {
         getData()
-    }, []);
+    }, [isDeleted]);
     const getData = async () => {
         await fetch('http://localhost:8000/index.php/read_all'
             , {
@@ -37,6 +41,7 @@ const MovieCardsGrid = () => {
                     releaseYear={movie.releaseYear}
                     desc={movie.description}
                     posterUrl={movie.posterPath}
+                    isDeleted = {deleteHandle}
                 />
                 // <MovieCardAsGrid
                 // key={i}
